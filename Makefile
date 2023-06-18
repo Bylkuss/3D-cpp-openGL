@@ -5,11 +5,18 @@ CPPFLAGS = -g -Wall -Werror -Wextra
 LDFLAGS = -lglut -lGLU -lGL
 RM = rm -rf
 
-HEADER = inc/Header.hpp 
+HEADER = inc/Header.hpp \
+		inc/Snake.hpp \
+	 	inc/Map.hpp \
+		inc/Head.hpp
 D_SRC = src/
 D_OBJ = obj/
 OBJS = $(patsubst $(D_SRC)%.cpp,$(D_OBJ)%.o,$(SRCS))
-SRCS = src/main.cpp
+SRCS = src/main.cpp \
+		src/Snake.cpp \
+		src/Map.cpp \
+		src/Head.cpp
+
 
 #------------------------------------------------------------------------------#
 #                                   RULES                                      #

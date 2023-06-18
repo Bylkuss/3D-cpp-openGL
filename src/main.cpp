@@ -1,26 +1,35 @@
 #include "../inc/Header.hpp"
 #include <GL/glut.h>
 
-void displayMe(void)
+int windowId; // Global variable to store the window ID
+
+Map map;
+void displayMapCallback()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glBegin(GL_POLYGON);
-        glVertex3f(0.5, 0.5, 0.5);
-        glVertex3f(0.5, 0.5, 0.5);
-        glVertex3f(0.0, 0.5, 0.5);
-        glVertex3f(0.0, 0.0, 0.5);
-    glEnd();
-    glFlush();
+   
+    map.displayMap();
 }
+void keyboardHandler(unsigned char key, int, int)
+{
+    if (key == ESC) // Check if the key is ESC (ASCII code 27)
+    {
+        glutDestroyWindow(windowId); // Close the window
+        exit(0); // Exit the program
+    }
+}
+
 
 int main(int argc, char** argv)
 {
+
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE);
     glutInitWindowSize(1080, 1920);
     glutInitWindowPosition(100, 100);
-    glutCreateWindow("Hello world!");
-    glutDisplayFunc(displayMe);
+    glutCreateWindow("SnakeGame");
+    glClearColor(0.5f, 0.5f, 0.5f, 0.5f); // gray  background
+    glutDisplayFunc(displayMapCallback);
+    glutKeyboardFunc(keyboardHandler); // Register the keyboard callback function
     glutMainLoop();
     return 0;
 }
