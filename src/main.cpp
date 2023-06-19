@@ -7,6 +7,29 @@ Map map;
 Snake snake(5, 5);
 Head head(50, 50);
 
+void displaySnake(GLfloat x, GLfloat y)
+{
+    map.displayMap();
+  
+    // Set up the orthographic projection
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0, WIDTH, HEIGHT, 0, -1, 1);
+    // Switch back to the modelview matrix
+    glMatrixMode(GL_MODELVIEW);
+     glColor3f(1.0, 0.0, 0.0);
+
+    glBegin(GL_QUADS);
+    glVertex2f(x * 10, y * 10);
+    glVertex2f((x + 1) * 10, y * 10);
+    glVertex2f((x + 1) * 10, (y + 1) * 10);
+    glVertex2f(x * 10, (y + 1) * 10);
+
+    glFlush();
+    glEnd();
+}
+
 void displayMapCallback(void)
 {
     int snakeX;
@@ -21,11 +44,11 @@ void displayMapCallback(void)
     glLoadIdentity();
     glOrtho(0, WIDTH, HEIGHT, 0, -1, 1);
     // Switch back to the modelview matrix
-    glMatrixMode(GL_MODELVIEW);
+
     // glLoadIdentity();
     // GLfloat pos[2] = {(GLfloat)snakeX, (GLfloat)snakeY};
     map.updateSnakePosition(snakeX, snakeY);
-    std::cout << " (x: " << snakeX << ", y: " << snakeY << ")" << std::endl;
+    // std::cout << " (x: " << snakeX << ", y: " << snakeY << ")" << std::endl;
     // std::cout << "snakeY" << snakeY<< std::endl;
     // Set the color to green for the snake
     glColor3f(1.0, 0.0, 0.0);
@@ -39,8 +62,11 @@ void displayMapCallback(void)
     // glVertex2f(1.0f / 250, -1.0f / 250);
     // glVertex2f(1.0f / 250, 1.0f / 250);
     // glVertex2f(-1.0f / 250, 1.0f / 250);
-    glEnd();
-    glFlush(); // Flush the rendering pipeline
+    // glEnd();
+    // glFlush(); // Flush the rendering pipeline
+
+
+    // displaySnake(snakeX, snakeY);
 }
 void keyboardHandler(unsigned char key, int, int)
 {
@@ -77,14 +103,6 @@ void keyboardHandler(unsigned char key, int, int)
         snake.move();        // Move the snake
         // glutPostRedisplay(); // Trigger a redraw of the window
     }
-    // else
-    // {
-    //     std::cout << "enters " << std::endl;
-    //     snake.move();        // Move the snake
-    //     glutPostRedisplay();
-    //     // glutKeyboardFunc(keyboardHandler);
-
-    // }
     
 }
 
@@ -96,8 +114,11 @@ void gameLoop(int)
     if (head.checkCollision(snake.getX(), snake.getY())) {
         // Handle collision logic here
         std::cout << "Collision detected" << std::endl;
-
         head.setPosition();
+        GLfloat x = head.getX();
+        GLfloat y = head.getY();
+        displaySnake(x, y);
+
     }
     int delay = 100; // Delay in milliseconds
     // Move the snake continuously based on the current direction
@@ -117,10 +138,10 @@ int main(int argc, char **argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(WIDTH, HEIGHT);
-    glutInitWindowPosition(100, 100);
+    glutInitWindowPosition(600, 100);
     glutCreateWindow("SnakeGame");
      // Start the game logic thread
-
+    head.setPosition();
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f); // gray  background
     glutDisplayFunc(displayMapCallback);
     glutKeyboardFunc(keyboardHandler);

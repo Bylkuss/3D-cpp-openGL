@@ -34,7 +34,7 @@ void Head::setY(int y)
 
 
 bool Head::checkCollision(int x, int y) const {
-        return (_x == x || _y == y);
+        return (_x == x && _y == y);
     }
 
 void Head::draw() const{
@@ -47,6 +47,7 @@ void Head::setPosition() {
      srand(time(nullptr));
 
         // Set position randomly between 5 and 48
-        _x = rand() % 44 + 5; // Generates a random number between 5 and 48
-        _y = rand() % 44 + 5;
+        _x = rand() % 4 + 5; // Generates a random number between 5 and 48
+        _y = rand() % 4 + 5;
+        std::cout << "collectible position: x = " << _x << ", y = " << _y << std::endl;
     }
