@@ -1,19 +1,27 @@
 #ifndef HEAD_HPP
 #define HEAD_HPP
 
-Class Head
+class Head
 {
 private:
     /* data */
+    int _sqSize = 10;
+    int _x;
+    int _y;
+
 public:
+    Head();
+    Head(int x, int y);
+    int getX();
+    int getY();
+    void setX(int x);
+    void setY(int y);
 
-    Head(/* args */);
+    void draw() const;
+    bool checkCollision(int x, int y) const;
+    void setPosition();
+
     ~Head();
-
-    void moveLeft();
-    void moveRight();
-    void moveUp();
-    void moveDown();
 };
 
 #endif

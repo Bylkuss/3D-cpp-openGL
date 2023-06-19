@@ -5,6 +5,9 @@
 #include <GL/glu.h>
 #include <iostream>
 #include <string>
+#include <thread>
+#include <cstdlib> // For rand() and srand()
+#include <ctime> // For time()
 
 #define MAP_HEIGHT 500
 #define MAP_WIDTH 500
@@ -40,5 +43,6 @@ void logKey(unsigned char key);
 
 #include "Snake.hpp"
 #include "Map.hpp"
+#include "Head.hpp"
 
 #endif
