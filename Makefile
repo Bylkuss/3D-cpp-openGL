@@ -1,4 +1,4 @@
-NAME = 3dView
+NAME = SnakeGame
 
 CC = g++
 CPPFLAGS = -g -Wall -Werror -Wextra
@@ -15,6 +15,7 @@ OBJS = $(patsubst $(D_SRC)%.cpp,$(D_OBJ)%.o,$(SRCS))
 SRCS = src/main.cpp \
 		src/Snake.cpp \
 		src/Map.cpp \
+		src/utils.cpp \
 		src/Head.cpp
 
 
@@ -35,6 +36,7 @@ $(OBJS): $(D_OBJ)%.o: $(D_SRC)%.cpp $(HEADER)
 	@$(CC) $(CPPFLAGS) -c $< -o $@
 
 run: re
+	@clear
 	@./$(NAME)
 
 

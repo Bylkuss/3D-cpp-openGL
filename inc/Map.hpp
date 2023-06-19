@@ -1,21 +1,16 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
-
 #include "Header.hpp"
 #include "Snake.hpp"
 
-
-#define UP 1
-#define LEFT 2
-#define RIGHT 3
 
 class Map
 {
 private:
     /* data */
-    int _width = 15;
-    int _height = 10;
+    int _width = 10;
+    int _height = 20;
     int _map[500][500];
     GLfloat _bg[3] = {0.0, 0.0, 0.0};
 
@@ -25,9 +20,11 @@ public:
     /*getters an setters*/
     int getWidth();
     int getHeight();
+    void updateSnakePosition(int x, int y)
+    {
+        _map[x][y] = 'S';
+    }
     ~Map();
 };
-
-
 
 #endif
